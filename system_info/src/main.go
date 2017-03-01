@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -37,20 +38,24 @@ func handler(w http.ResponseWriter, r *http.Request) {
 					line = strings.Replace(line, ": ", ":", -1)
 					kv_arr = strings.Split(line, ":")
 
-					if len(kv_arr) > 1 {
-						out_hash[kv_arr[0]] = kv_arr[1]
-					} else {
-						out_hash[kv_arr[0]] = ""
+					if kv_arr[0] != "" {
+						if len(kv_arr) > 1 {
+							out_hash[kv_arr[0]] = kv_arr[1]
+						} else {
+							out_hash[kv_arr[0]] = ""
+						}
 					}
 				case "meminfo":
 					line = strings.Replace(line, "  ", "", -1)
 					line = strings.Replace(line, ": ", ":", -1)
 					kv_arr = strings.Split(line, ":")
 
-					if len(kv_arr) > 1 {
-						out_hash[kv_arr[0]] = kv_arr[1]
-					} else {
-						out_hash[kv_arr[0]] = ""
+					if kv_arr[0] != "" {
+						if len(kv_arr) > 1 {
+							out_hash[kv_arr[0]] = kv_arr[1]
+						} else {
+							out_hash[kv_arr[0]] = ""
+						}
 					}
 				case "uptime":
 					out_hash["uptime"] = strings.Split(line, " ")[0]
@@ -62,12 +67,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 
-			fmt.Fprintln(w, out_hash)
+			json_bytes, err := json.Marshal(out_hash)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Fprintln(w, string(json_bytes))
 			return
 		}
 	}
 
-	fmt.Fprintln(w, "Endpoints: cpuinfo, meminfo, uptime")
+	for _, e := range endpoints {
+		fmt.Fprintln(w, "<a href='/"+e+"'>"+e+"</a>\n"+"<br>\n")
+	}
 	return
 }
 
