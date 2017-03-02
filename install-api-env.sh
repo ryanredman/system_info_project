@@ -4,8 +4,13 @@ install_system_info() {
     if [ -d /home/vagrant/system_info_project ]; then 
         GOPATH=/home/vagrant/system_info_project/system_info/
         GOBIN=$GOPATH/bin
-        
-        if [ $(go install $GOPATH/src/system_info) ]; then 
+
+        if [ ! -d $GOBIN ]; then
+            mkdir $GOBIN
+        fi
+
+        go install system_info
+        if [ $? -eq 0 ]; then 
             $GOBIN/system_info &
             echo "system_info running in background."
             exit 0
@@ -19,7 +24,8 @@ install_system_info() {
     fi
 }
 
-if [ $(which go 2&> /dev/null) ]; then
+which go
+if [ $? -eq 0 ]; then
     install_system_info
 else
     uname -a | grep -qi ubuntu
