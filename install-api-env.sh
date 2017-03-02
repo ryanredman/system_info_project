@@ -18,10 +18,10 @@ install_system_info() {
     fi
 }
 
-if [ $(which go 2&> /dev/null) -eq 0 ]; then
+if [ $(which go 2&> /dev/null) ]; then
     install_system_info
 else
-    if [ $(uname -a | grep -qi ubuntu) -eq 0]; then
+    if [ $(uname -a | grep -qi ubuntu) ]; then
         echo "Adding repo: ppa:ubuntu-lxc/lxd-stable - $(date)"
         sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable 
         echo "Uptating - $(date)"
