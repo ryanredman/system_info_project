@@ -21,7 +21,9 @@ install_system_info() {
 if [ $(which go 2&> /dev/null) ]; then
     install_system_info
 else
-    if [ $(uname -a | grep -qi ubuntu) ]; then
+    uname -a | grep -qi ubuntu
+
+    if [ $? -eq 0 ]; then
         echo "Adding repo: ppa:ubuntu-lxc/lxd-stable - $(date)"
         sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable 
         echo "Uptating - $(date)"
@@ -38,7 +40,7 @@ else
     else
         echo "This script is designed to be ran on a machine running Ubuntu Linux."
         echo "You are running:"
-        echo "\t$(uname -a)"
+        echo -e "\t$(uname -a)"
         exit 1
     fi
 fi
