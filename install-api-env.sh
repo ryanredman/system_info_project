@@ -1,7 +1,8 @@
 #!/bin/bash
+
 install_system_info() {
-    if [ -d $HOME/system_info_project ]; then 
-        GOPATH=$HOME/system_info_project/system_info/
+    if [ -d /home/vagrant/system_info_project ]; then 
+        GOPATH=/home/vagrant/system_info_project/system_info/
         GOBIN=$GOPATH/bin
         
         if [ $(go install $GOPATH/src/system_info) ]; then 
