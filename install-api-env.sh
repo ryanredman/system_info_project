@@ -2,8 +2,8 @@
 
 install_system_info() {
     if [ -d /home/vagrant/system_info_project ]; then 
-        GOPATH=/home/vagrant/system_info_project/system_info/
-        GOBIN=$GOPATH/bin
+        export GOPATH=/home/vagrant/system_info_project/system_info/
+        export GOBIN=$GOPATH/bin
 
         if [ ! -d $GOBIN ]; then
             mkdir $GOBIN
@@ -15,7 +15,7 @@ install_system_info() {
             echo "system_info running in background."
             exit 0
         else
-            echo "Error install system_info. Exiting"
+            echo "Error installing system_info. Exiting"
             exit 1
         fi
     else 
