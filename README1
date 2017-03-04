@@ -1,0 +1,19 @@
+Phase One:
+
+    Program: system_info
+    Author: Ryan Redman
+    Language: Go
+
+    This Go program reads a list of strings, describing proc device files, from a slice.
+    Each file is read (via an os call to cat), and the output is then parsed into an
+    associative array. This array is then marshalled into JSON and presented on a server, 
+    listening on port 1404, at endpoints matching the proc filename.
+
+    Additionally, the root directory of the server presents a generated HTML list of links
+    to the various endpoints.
+
+    Configured endpoints include:
+        - cpuinfo
+        - meminfo
+        - uptime
+

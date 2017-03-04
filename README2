@@ -1,0 +1,9 @@
+Phase 2:
+
+    Vagrant file (now old/Vagrantfile.old) executes a script which checks for and, when nessecary, installs git.
+    The script then pulls the repo for the system_info Go from Github. It then executes the install-api-env.sh
+    script contained in the repo, or will launch the system_info server in the background.
+
+    The install-api-env.sh script verifies/performs and installation of the base golang tools via apt-get.
+    It then compiles the system_info server application, and runs the process in the background.
+    

@@ -1,0 +1,9 @@
+Phase 3:
+    
+    Vagrantfile provisions via Puppet. The manifest default.pp does the following:
+        - apt-get update
+        - Install git
+        - Install golang
+        - Clone system_info_project repo from Github
+        - Installs system_info server utility from repo source
+        - Launches the system_info server in the background unless already running

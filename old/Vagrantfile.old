@@ -1,0 +1,28 @@
+$script = <<SCRIPT
+    echo Provisioning...
+    date > /etc/vagrant_provisioned_at
+    
+    which git 2&> /dev/null && \ 
+    git clone https://github.com/ryanredman/system_info_project.git || \
+    (sudo apt-get install -y git && \
+        git clone https://github.com/ryanredman/system_info_project.git || \
+        echo "Failed cloning git repo. $(date)")
+
+    if [ -d system_info_project ]; then
+        cd system_info_project
+        if [ -e ./install-api-env.sh ]; then
+            chmod +x ./install-api-env.sh
+            ./install-api-env.sh
+        fi
+    fi
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu64"
+
+  config.vm.network "private_network", ip: "192.168.37.12"
+  config.vm.network "forwarded_port", guest: 8080, host: 1404
+
+  config.vm.provision "shell",
+  inline: $script
+end
