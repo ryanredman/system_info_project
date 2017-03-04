@@ -1,4 +1,5 @@
 Phase 3:
+    Commit: 9c95df55c534e087d0e52672be098c7a766431ab
     
     Vagrantfile provisions via Puppet. The manifest default.pp does the following:
         - apt-get update

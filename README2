@@ -1,4 +1,5 @@
 Phase 2:
+    commit: 63c0db5dc09085036cc01bfe089ffaf8c7595477
 
     Vagrant file (now old/Vagrantfile.old) executes a script which checks for and, when nessecary, installs git.
     The script then pulls the repo for the system_info Go from Github. It then executes the install-api-env.sh

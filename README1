@@ -3,6 +3,7 @@ Phase One:
     Program: system_info
     Author: Ryan Redman
     Language: Go
+    commit: 78cdf4024b45d2f902baba72b47be83905a7e210
 
     This Go program reads a list of strings, describing proc device files, from a slice.
     Each file is read (via an os call to cat), and the output is then parsed into an
